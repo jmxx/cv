@@ -3,13 +3,15 @@ import merge                from 'webpack-merge';
 import FriendlyErrorsPlugin from 'friendly-errors-webpack-plugin';
 import webpackBase          from './webpack.base';
 
-Object.keys(webpackBase.entry).forEach((name) => {
-  webpackBase.entry[name] = [
+const config = webpackBase();
+
+Object.keys(config.entry).forEach((name) => {
+  config.entry[name] = [
     './webpack/hot-client',
-  ].concat(webpackBase.entry[name]);
+  ].concat(config.entry[name]);
 });
 
-export default merge(webpackBase, {
+export default merge(config, {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
 
