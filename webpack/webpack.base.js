@@ -14,6 +14,11 @@ const entry = {
   ]
 };
 
+const extractStyle = new ExtractTextPlugin({
+  filename: 'css/[name].css',
+  disable: true
+});
+
 export default {
   entry,
   output: {
@@ -38,9 +43,27 @@ export default {
           plugins: ['react-hot-loader/babel'],
         }
       },
+      {
+        test: /\.styl$/,
+        use: extractStyle.extract({
+          fallback: 'style-loader',
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                modules: true,
+                localIdentName: '[local]--[hash:base64:5]',
+              },
+            },
+            'stylus-loader',
+          ]
+        })
+      },
     ]
   },
   plugins: [
+    extractStyle,
+
     new HtmlWebpackPlugin({
       template: path.resolve(paths.app, 'index.html'),
       inject: true,
