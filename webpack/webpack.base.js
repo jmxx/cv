@@ -26,6 +26,11 @@ export default function webpackBase(options = {}) {
       path: paths.dist,
       filename: 'js/[name].bundle.js',
     },
+    resolve: {
+      alias: {
+        '@': paths.app
+      }
+    },
     module: {
       rules: [
         {
