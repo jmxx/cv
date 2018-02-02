@@ -28,7 +28,8 @@ export default function webpackBase(options = {}) {
     },
     resolve: {
       alias: {
-        '@': paths.app
+        '@': paths.app,
+        '~assets': path.resolve(paths.app, 'assets'),
       }
     },
     module: {
@@ -57,13 +58,26 @@ export default function webpackBase(options = {}) {
               {
                 loader: 'css-loader',
                 options: {
+                  url: true,
                   modules: true,
                   localIdentName: '[local]--[hash:base64:5]',
+                  importLoaders: 2,
                 },
               },
               'stylus-loader',
             ]
           })
+        },
+        {
+          test: /\.(png|jpe?g|gif|svg)(\?[a-z0-9=\.]+)?$/,
+          use: [{
+            loader: 'url-loader',
+            options: {
+              limit: 40000,
+              name: 'assets/imgs/[name].[ext]?[hash]',
+              publicPath: '/'
+            }
+          }]
         },
       ]
     },

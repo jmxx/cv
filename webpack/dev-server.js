@@ -1,4 +1,5 @@
 import express              from 'express';
+import opn                  from 'opn';
 import webpack              from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
@@ -20,6 +21,10 @@ const hotMiddleware = webpackHotMiddleware(webpackCompiler, {
 app.use(devMiddleware);
 
 app.use(hotMiddleware);
+
+devMiddleware.waitUntilValid(() => {
+  opn(`http://localhost:${PORT}`);
+});
 
 
 app.listen(PORT, () => {
