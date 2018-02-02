@@ -1,5 +1,6 @@
 import path               from 'path';
 import webpack            from 'webpack';
+import loaderUtils        from 'loader-utils';
 import ExtractTextPlugin  from 'extract-text-webpack-plugin';
 import HtmlWebpackPlugin  from 'html-webpack-plugin';
 
@@ -62,6 +63,28 @@ export default function webpackBase(options = {}) {
                   modules: true,
                   localIdentName: '[local]--[hash:base64:5]',
                   importLoaders: 2,
+                  getLocalIdent(loaderContext, localIdentName, localName, options) {
+                    if (loaderContext.resourcePath.match(/components/)) {
+                      if (!options.context) {
+                        options.context = loaderContext.options
+                          && typeof loaderContext.options.context === "string"
+                          ? loaderContext.options.context
+                          : loaderContext.context;
+                      }
+
+                      let request = path.relative(options.context, loaderContext.resourcePath);
+                      options.content = options.hashPrefix + request + '+' + localName;
+                      localIdentName = localIdentName.replace(/\[local\]/gi, localName);
+                      let hash = loaderUtils.interpolateName(loaderContext, localIdentName, options);
+
+                      return hash
+                        .replace(new RegExp("[^a-zA-Z0-9\\-_\u00A0-\uFFFF]", "g"), "-")
+                        .replace(/^((-?[0-9])|--)/, "_$1");
+                    }
+
+                    return localName;
+
+                  }
                 },
               },
               'stylus-loader',
