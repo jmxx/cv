@@ -20,10 +20,23 @@ html *
 body
   font-family 'Open Sans', sans-serif
   font-weight 400
+  font-size 16px
+  background #f0f0f0
+  background url('~assets/imgs/clouds.jpg') top left no-repeat
+  background-size cover
+  background-attachment fixed
+  &:before
+    background url('~assets/imgs/dot-black.png') repeat 5px 5px
+    background-attachment fixed
+    bottom 0
+    content ''
+    display block
+    left 0
+    opacity 0.5
+    position fixed
+    right 0
+    top 0
+    z-index 1
 
 h1, h2, h3
   margin 0
-
-:global .Wrapper
-  height 100vh
-  padding 30px

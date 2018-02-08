@@ -1,11 +1,12 @@
-import React    from 'react';
-import { hot }  from 'react-hot-loader';
-import classes  from './App.styl';
+import React       from 'react';
+import { hot }     from 'react-hot-loader';
+import classes     from './App.styl';
+import Quote       from '@/components/layout/Quote/Quote.jsx';
 
 const App = () => {
   return (
-    <div className={classes.App}>
-      <h1>CV</h1>
+    <div className={ classes.Wrapper }>
+      <Quote />
     </div>
   );
 };
