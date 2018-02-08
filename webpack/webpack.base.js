@@ -67,7 +67,7 @@ export default function webpackBase(options = {}) {
                     if (loaderContext.resourcePath.match(/components/)) {
                       if (!options.context) {
                         options.context = loaderContext.options
-                          && typeof loaderContext.options.context === "string"
+                          && typeof loaderContext.options.context === 'string'
                           ? loaderContext.options.context
                           : loaderContext.context;
                       }
@@ -78,12 +78,11 @@ export default function webpackBase(options = {}) {
                       let hash = loaderUtils.interpolateName(loaderContext, localIdentName, options);
 
                       return hash
-                        .replace(new RegExp("[^a-zA-Z0-9\\-_\u00A0-\uFFFF]", "g"), "-")
-                        .replace(/^((-?[0-9])|--)/, "_$1");
+                        .replace(new RegExp('[^a-zA-Z0-9\\-_\u00A0-\uFFFF]', 'g'), '-')
+                        .replace(/^((-?[0-9])|--)/, '_$1');
                     }
 
                     return localName;
-
                   }
                 },
               },
