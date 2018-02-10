@@ -1,0 +1,19 @@
+$scale = 1.5
+
+@keyframes scale-to-left
+  0%
+    transform scale3d($scale, $scale, $scale) translate3d(-3%, -3%, 0)
+  to
+    transform scaleX(1) translateZ(0)
+
+@keyframes scale-to-center
+  0%
+    transform scale3d($scale, $scale, $scale)
+  to
+    transform:scaleX(1)
+
+@keyframes scale-to-right
+  0%
+    transform scale3d($scale, $scale, $scale) translate3d(3%, 3%, 0)
+  to
+    transform scaleX(1) translateZ(0)

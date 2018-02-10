@@ -1,3 +1,5 @@
+@import './animations.styl'
+
 html, body
   margin 0
   padding 0
@@ -22,21 +24,34 @@ body
   font-weight 400
   font-size 16px
   background #f0f0f0
-  background url('~assets/imgs/clouds.jpg') top left no-repeat
-  background-size cover
-  background-attachment fixed
-  &:before
-    background url('~assets/imgs/dot-black.png') repeat 5px 5px
+
+h1, h2, h3
+  margin 0
+
+:global #bg
+  position fixed
+  height 100%
+  width 100%
+  &:before, &:after
+    background-position top left
     background-attachment fixed
     bottom 0
     content ''
     display block
     left 0
-    opacity 0.5
     position fixed
     right 0
     top 0
     z-index 1
-
-h1, h2, h3
-  margin 0
+  &:before
+    background-image url('assets/imgs/clouds.jpg')
+    background-repeat no-repeat
+    background-size cover
+    animation-duration 35s
+    animation-name scale-to-center
+    animation-timing-function ease-out
+  &:after
+    background-image url('assets/imgs/dot-black.png')
+    background-position 5px 5px
+    opacity 0.5
+    z-index 2
