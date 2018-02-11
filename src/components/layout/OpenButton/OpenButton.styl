@@ -1,0 +1,44 @@
+@import '../../../functions.styl'
+
+$size = 60px
+$primary-color = #fff
+$ball-size = 15px
+$margin = 2px
+
+ball-scale-multiple($n = 3, $start = 2)
+  for $i in ($start..$n)
+    > div:nth-child({$i})
+      animation-delay delay(0.5s, $n, $i - 1)
+
+@keyframes ball-scale-multiple
+  0%
+    transform scale(0.0)
+    opacity 0
+  5%
+    opacity 1
+  100%
+    transform scale(1.0)
+    opacity 0
+
+.OpenButton
+  ball-scale-multiple()
+  cursor pointer
+  margin 0 auto
+  position relative
+  transform translate(0, -0.5 * $size)
+  width $size
+
+  > div
+    background-color $primary-color
+    width $ball-size
+    height $ball-size
+    border-radius 100%
+    margin $margin
+    position absolute
+    // left -30px
+    top 0px
+    opacity 0
+    margin 0
+    width $size
+    height $size
+    animation ball-scale-multiple 2s 0s linear infinite

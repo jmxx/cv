@@ -86,7 +86,13 @@ export default function webpackBase(options = {}) {
                   }
                 },
               },
-              'stylus-loader',
+              {
+                loader: 'stylus-loader',
+                options: {
+                  use: [],
+                  preferPathResolver: 'webpack',
+                },
+              },
             ]
           })
         },
